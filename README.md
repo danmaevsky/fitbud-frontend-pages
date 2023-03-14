@@ -1,3 +1,8 @@
+# Fitbud Front-End
+
+The aim of this project is to create a SPA using React and React-Router. Users should be able to perform all the business functionalities that our app offers here, which we have highlighted in previous
+project reports.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
