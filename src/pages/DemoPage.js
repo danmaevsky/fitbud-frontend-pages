@@ -292,6 +292,7 @@ function SearchDemo(props) {
 function SearchBox(props) {
     const onSubmit = props.onSubmit;
     const [textValue, setTextValue] = useState("");
+
     return (
         <div className="demo-page-search-box">
             <input
@@ -306,7 +307,7 @@ function SearchBox(props) {
                     }
                 }}
             ></input>
-            <button className="demo-page-search-box-submit" onClick={onSubmit}></button>
+            <button className="demo-page-search-box-submit" onClick={() => onSubmit(textValue)}></button>
         </div>
     );
 }
