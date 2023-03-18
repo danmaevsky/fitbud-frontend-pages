@@ -233,6 +233,7 @@ function SearchDemo(props) {
     } else if (type === "exercise") {
         onSubmit = (query) => {
             let temp;
+            console.log(query);
             fetch(`${process.env.REACT_APP_GATEWAY_URI}/exercise/${radio}/?search=${query}`)
                 .then((res) => {
                     temp = res.status;
@@ -304,9 +305,9 @@ function SearchBox(props) {
                         onSubmit(textValue);
                         return;
                     }
-                }}
+                }} 
             ></input>
-            <button className="demo-page-search-box-submit" onClick={onSubmit}></button>
+            <button className="demo-page-search-box-submit" onClick={() => onSubmit(textValue)}></button>
         </div>
     );
 }
