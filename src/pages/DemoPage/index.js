@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./DemoPage.css";
-import Html5QrcodePlugin from "../components/Html5QrcodePlugin";
+import Html5QrcodePlugin from "components/Html5QrcodePlugin";
 
 function DemoPage(props) {
     return (
@@ -51,11 +51,15 @@ function CreateAccountDemo(props) {
 
     return (
         <div>
-            <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <input type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             <input type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-            <input type="text" placeholder="Sex" value={sex} onChange={(e) => setSex(e.target.value)} />
+            <input list="sex-options" type="text" placeholder="Sex" value={sex} onChange={(e) => setSex(e.target.value)} />
+            <datalist id="sex-options">
+                <option value="Male" />
+                <option value="Female" />
+            </datalist>
             <button onClick={createCallback}>Create Account</button>
         </div>
     );
@@ -163,25 +167,58 @@ function BarcodeDemo(props) {
 function SearchResult(props) {
     const type = props.type;
     const result = props.result;
+    const [additionalInfo, setAdditionalInfo] = useState(null);
+
+    const onBlur = () => {
+        setAdditionalInfo(null);
+    };
 
     if (type === "food") {
+        const onClick = (e) => {
+            e.target.focus();
+            fetch(`${process.env.REACT_APP_GATEWAY_URI}/food/${result._id}`)
+                .then((res) => res.json())
+                .then((json) => setAdditionalInfo(json));
+        };
         return (
-            <li className="demo-page-search-result">
+            <li className="demo-page-search-result" onClick={onClick} onBlur={onBlur} tabIndex="1">
                 <div>
                     <h5>{ProcessFoodName(result.name)}</h5>
-                    <p>Original Text: {result.name} </p>
+                    {/* <p>Original Text: {result.name} </p> */}
                     {result.brandName ? <p>{ToTitleCase(result.brandName)}</p> : null}
                 </div>
+                {additionalInfo ? (
+                    <ul className="demo-page-search-result-additional-info">
+                        <li>Serving Size: {additionalInfo.servingQuantity + " " + additionalInfo.servingQuantityUnit}</li>
+                        <li>Calories: {((additionalInfo.nutritionalContent.kcal / 100) * additionalInfo.servingQuantity).toFixed(0)}</li>
+                        <li>Total Fat: {((additionalInfo.nutritionalContent.totalFat / 100) * additionalInfo.servingQuantity).toFixed(1)}</li>
+                        <li>
+                            Total Carbohydrates: {((additionalInfo.nutritionalContent.totalCarb / 100) * additionalInfo.servingQuantity).toFixed(1)}
+                        </li>
+                        <li>Protein: {((additionalInfo.nutritionalContent.protein / 100) * additionalInfo.servingQuantity).toFixed(1)}</li>
+                    </ul>
+                ) : null}
             </li>
         );
     }
 
     if (type === "exercise") {
+        const onClick = (e) => {
+            e.target.focus();
+            fetch(`${process.env.REACT_APP_GATEWAY_URI}/exercise/strength/${result._id}`)
+                .then((res) => res.json())
+                .then((json) => setAdditionalInfo(json));
+        };
         return (
-            <li className="demo-page-search-result">
+            <li className="demo-page-search-result" onClick={onClick} onBlur={onBlur}>
                 <div>
                     <h5>{result.name}</h5>
                 </div>
+                {additionalInfo ? (
+                    <ul className="demo-page-search-result-additional-info">
+                        <li>MET Value: {additionalInfo.MET}</li>
+                    </ul>
+                ) : null}
             </li>
         );
     }
@@ -272,10 +309,10 @@ function SearchDemo(props) {
                 </ul>
             ) : null}
             {responseStatus !== 200 ? "404 Not Found" : null}
-            <div className="search-demo-page-buttons">
+            {/* <div className="search-demo-page-buttons">
                 <button onClick={decrementPage}>Prev</button>
                 <button onClick={incrementPage}>Next</button>
-            </div>
+            </div> */}
         </div>
     );
 }
@@ -298,7 +335,9 @@ function SearchBox(props) {
                     }
                 }}
             ></input>
-            <button className="demo-page-search-box-submit" onClick={() => onSubmit(textValue)}></button>
+            <button className="demo-page-search-box-submit" onClick={() => onSubmit(textValue)}>
+                Search!
+            </button>
         </div>
     );
 }
