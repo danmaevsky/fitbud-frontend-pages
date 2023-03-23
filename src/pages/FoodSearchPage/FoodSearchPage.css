@@ -12,26 +12,34 @@
 }
 #food-search-page-searchbox {
     position: inherit;
+    box-sizing: border-box;
+    height: 2.75rem;
+    width: auto;
     z-index: 1;
     display: flex;
     margin-bottom: 1rem;
     align-items: center;
     background-color: white;
     border-radius: 20px;
+    border: 0.2rem solid var(--default-primary-border);
 }
 #food-search-page-searchbox input {
-    padding: 1rem;
+    font-size: 1rem;
+    outline: none;
+    padding: 0;
+    margin-left: 1.5rem;
     min-width: 13.125rem;
     width: 30vw;
     max-width: 35rem;
-    height: 0.5rem;
+    height: 2rem;
     border: none;
-    border-radius: 20px;
     background-color: white;
 }
 
 #food-search-page-searchbox button {
-    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     right: 0;
     margin-right: 1rem;
     height: 2rem;
@@ -41,18 +49,24 @@
     border: none;
     border-radius: 50%;
 }
+
 #food-search-page-searchbox button:hover {
     background-color: var(--default-primary-background);
 }
+
 #food-search-page-searchbox button img {
     height: 1rem;
 }
 
+#food-search-page-searchbox:focus-within {
+    border: 0.2rem solid var(--default-primary-blue);
+}
+
 #food-search-island {
+    backdrop-filter: blur(0);
     filter: drop-shadow(0 6px 9px rgba(0, 0, 0, 0.363));
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     border-radius: 1rem;
     padding-left: 3vw;
@@ -76,6 +90,7 @@
     max-height: 50vh;
     width: 90%;
     overflow: auto;
+    justify-self: flex-start;
 }
 
 #food-search-island ul li {
@@ -113,6 +128,24 @@
     font-size: 0.75rem;
 }
 
+#food-search-island-number {
+    padding: 0;
+    margin: 0;
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    align-self: flex-start;
+    color: var(--default-secondary-text);
+}
+
+#food-search-island #food-search-refine-message {
+    cursor: default;
+    text-align: center;
+    background-color: white;
+}
+#food-search-island #food-search-refine-message:hover {
+    filter: none;
+}
+
 #food-search-page-round-background-decoration {
     position: absolute;
     z-index: 0;
@@ -143,12 +176,50 @@
 
 @media screen and (max-width: 800px) {
     #food-search-page-body input {
-        width: 50vw;
+        width: 55vw;
     }
     #food-search-island {
         width: 60vw;
     }
     #food-search-page-round-background-decoration {
         max-height: 30vh;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #food-search-page-searchbox {
+        height: 4.25rem;
+        border-radius: 3rem;
+    }
+    #food-search-page-searchbox input {
+        font-size: 1.5rem;
+        min-width: 13.125rem;
+        width: 60vw;
+        max-width: 35rem;
+        height: 2rem;
+        border: none;
+        background-color: white;
+    }
+
+    #food-search-page-searchbox button {
+        margin-right: 1rem;
+        height: 3rem;
+        width: 3rem;
+    }
+
+    #food-search-page-searchbox button img {
+        height: 1.5rem;
+    }
+
+    #food-search-island {
+        width: 70vw;
+    }
+
+    #food-search-island ul li h4 {
+        font-size: 1.125rem;
+    }
+
+    #food-search-island ul li p {
+        font-size: 0.875rem;
     }
 }
