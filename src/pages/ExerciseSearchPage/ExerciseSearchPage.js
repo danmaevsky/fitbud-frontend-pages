@@ -11,7 +11,7 @@ export default function ExerciseSearchPage() {
     const [searchStatus, setSearchStatus] = useState(200);
 
     const fetchResults = () => {
-        fetch(`${process.env.REACT_APP_GATEWAY_URI}/exercise/${exerciseType}/?search=${searchText}`)
+        fetch(`${process.env.REACT_APP_GATEWAY_URI}/exercise/${exerciseType}/?search=${encodeURIComponent(searchText)}`)
             .then((res) => {
                 setSearchStatus(res.status);
                 return res.json();
@@ -32,6 +32,9 @@ export default function ExerciseSearchPage() {
             <div id="exercise-search-page-bottom-top-banner-background-decoration"></div>
             <div id="exercise-search-page-bottom-bot-banner-background-decoration"></div>
             <div id="exercise-search-page-searchbox">
+                <button id="exercise-search-page-searchbox-button" onClick={fetchResults}>
+                    <img src={magnifyingGlass} />
+                </button>
                 <input
                     id="exercise-search-page-searchbox-input"
                     type="text"
@@ -40,8 +43,8 @@ export default function ExerciseSearchPage() {
                     onChange={(e) => setSearchText(e.target.value)}
                     onKeyDown={inputOnKeydown}
                 ></input>
-                <button id="exercise-search-page-searchbox-button" onClick={fetchResults}>
-                    <img src={magnifyingGlass} />
+                <button id="food-search-page-cleartext-button" onClick={() => setSearchText("")}>
+                    X
                 </button>
             </div>
             <div id="exercise-search-page-choices">
