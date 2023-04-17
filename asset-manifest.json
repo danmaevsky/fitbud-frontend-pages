@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/fitbud-frontend-pages/static/css/main.a501d72c.css",
-    "main.js": "/fitbud-frontend-pages/static/js/main.5dbdef34.js",
+    "main.css": "/fitbud-frontend-pages/static/css/main.744ec044.css",
+    "main.js": "/fitbud-frontend-pages/static/js/main.b82bc00a.js",
     "static/js/27.27dd4fb7.chunk.js": "/fitbud-frontend-pages/static/js/27.27dd4fb7.chunk.js",
     "static/media/magnifying-glass.svg": "/fitbud-frontend-pages/static/media/magnifying-glass.6801b76f612b02ce97628efa1bc961e4.svg",
     "static/media/barcode-scan-icon.svg": "/fitbud-frontend-pages/static/media/barcode-scan-icon.2f12f8f1391332435862931717dd3281.svg",
@@ -9,7 +9,7 @@
     "static/media/back-arrow.svg": "/fitbud-frontend-pages/static/media/back-arrow.0d23849785d370bcfca40f0273884107.svg"
   },
   "entrypoints": [
-    "static/css/main.a501d72c.css",
-    "static/js/main.5dbdef34.js"
+    "static/css/main.744ec044.css",
+    "static/js/main.b82bc00a.js"
   ]
 }
